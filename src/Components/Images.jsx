@@ -29,7 +29,7 @@ const genImage = (prompt,modelName) => {
   });
 }
 const ImageGenerator = ({lyrics}) => {
-  const [modelName,setModelName] = useState("state-diffusion")
+  const [modelName,setModelName] = useState("stable-diffusion")
   const [prompt1,setPrompt1] = useState("Image Caption will be displayed here")
   console.log(lyrics)
 
@@ -64,17 +64,15 @@ axios.request(generatePrompt).then(function (response) {
  
   return (
     <div className="mt-10 sm:mt-0">
-        <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="md:col-span-1">
-            <div className="px-4 sm:px-0">
-              <h3 className="text-base font-semibold leading-6 text-gray-900">Personal Information</h3>
-              <p className="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
-            </div>
-          </div>
-          <div className="mt-5 md:col-span-2 md:mt-0">
+      <h1 className="text-4xl text-center mb-40 font-bold tracking-tight text-gray-900 sm:text-6xl">
+               Generate Music Video Thumbnail
+              </h1>
+        {/* <div className="md:grid md:grid-cols-3 md:gap-6"> */}
+          
+          <div className="flex mt-5 items-center justify-center md:col-span-2 md:mt-0">
             <form onSubmit={handleSubmitImage}>
             <figure class="max-w-lg">
-              <img id="genImage" class="h-auto max-w-full rounded-lg" src="https://flowbite.com/docs/images/examples/image-3@2x.jpg" alt="image description"/>
+              <img id="genImage" class=" items-center h-auto max-w-full rounded-lg" src="https://flowbite.com/docs/images/examples/image-3@2x.jpg" alt="image description"/>
               <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">{prompt1}</figcaption>
             </figure>
             <div className="col-span-6 sm:col-span-3">
@@ -91,17 +89,17 @@ axios.request(generatePrompt).then(function (response) {
                         onChange={(e) => setModelName(e.target.value)}
                       />
                     </div>
-                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                <div className="flex items-center justify-center bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
                     className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    Save
+                    Submit
                   </button>
                 </div>
             </form>
           </div>
-        </div>
+        
       </div>
 
   )

@@ -42,12 +42,14 @@ function render(id){
       
       axios.request(options).then(function (response) {
           console.log(response.data);
+          
+
       }).catch(function (error) {
           console.error(error);
       });
-      
+    }
 
-}
+
 
 const AudioGenerator = () => {
 
@@ -67,19 +69,14 @@ const AudioGenerator = () => {
       
       axios.request(speech).then(function (response) {
           console.log(response.data);
-          render(response.data.id)
+          const myTimeout = setTimeout(render,5000,response.data.id)
       }).catch(function (error) {
           console.error(error);
       });
-
-
-
-
-
 };
 
   return (
-    <div className="mt-10 sm:mt-0">
+    <div className="mt-40 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
@@ -89,20 +86,25 @@ const AudioGenerator = () => {
           </div>
           <div className="mt-5 md:col-span-2 md:mt-0">
             <form onSubmit={handleSubmitAudio}>
-            <figure class="max-w-lg">
-              <img id="genImage" class="h-auto max-w-full rounded-lg" src="https://flowbite.com/docs/images/examples/image-3@2x.jpg" alt="image description"/>
-              <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">Image caption</figcaption>
-            </figure>
-
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
                     className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    Save
+                    Generate
                   </button>
                 </div>
             </form>
+            
+                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                  <a href="" id="download"><button  
+                    type="submit"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    Download
+                  </button>
+                  </a>
+                </div>
           </div>
         </div>
       </div>
