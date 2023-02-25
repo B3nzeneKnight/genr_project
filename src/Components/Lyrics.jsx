@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios';
 
-const LyricsGenerator = () => {
+const LyricsGenerator = (props) => {
   const [genre, setGenre] = useState("");
   const [artist, setArtist] = useState("");
   const [keywords1, setKeyword1] = useState("");
@@ -11,30 +11,32 @@ const LyricsGenerator = () => {
 
   let handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(setArtist);
-    console.log(setGenre);
-    console.log(setKeyword1);
-    console.log(setKeyword2);
-    console.log(setKeyword3);
+    console.log(genre);
+    console.log(artist);
+    console.log(keywords1);
+    console.log(keywords2);
+    console.log(keywords3);
 const options = {
   method: 'POST',
   url: 'https://v1.genr.ai/api/use-case/generate-lyrics',
   headers: {'Content-Type': 'application/json'},
   data: {
-    genre: `${setGenre}`,
-    artist:`${setArtist}`,
-    modifier1: `${setKeyword1}`,
-    modifier2: `${setKeyword2}`,
-    modifier3:`${setKeyword3}`,
+    genre: `${genre}`,
+    artist:`${artist}`,
+    modifier1: `${keywords1}`,
+    modifier2: `${keywords2}`,
+    modifier3:`${keywords3}`,
     chord_flag: false,
     complex_chord_flag: false,
     key: 'C',
-    scale: 'Major'
+    scale: 'Major',
+    temperature: 0,
   }
 };
 
 axios.request(options).then(function (response) {
-  console.log(response.data);
+  console.log(response.data)
+  props.setLyrics(response.data.output);
 }).catch(function (error) {
   console.error(error);
 });
@@ -43,6 +45,7 @@ axios.request(options).then(function (response) {
 
 
   return (
+    <>
     <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
@@ -148,7 +151,22 @@ axios.request(options).then(function (response) {
           </div>
         </div>
       </div>
+      <div
+  className="rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1 shadow-xl"
+>
+  <a className="block rounded-xl bg-white p-4 sm:p-6 lg:p-8" href="">
+    <div className="mt-16">
+      <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+        Lyrics
+      </h3>
 
+      <p className="mt-2 text-sm text-gray-500">
+      {props.lyrics}
+      </p>
+    </div>
+  </a>
+</div>
+</>
   )
 }
 
